@@ -1,20 +1,9 @@
 import React from 'react'
+import FacebookLogin from './FacebookLogin/FacebookLogin'
 import './App.css'
 
-class App extends React.Component {
-  handleFacebookLogin = () => {
-    window.FB.login(function(response) {
-      if (response.authResponse) {
-       console.log('Welcome!  Fetching your information.... ')
-       window.FB.api('/me', function(response) {
-         console.log('Good to see you, ' + response.name + '.')
-       })
-      } else {
-       console.log('User cancelled login or did not fully authorize.')
-      }
-    }
-  )}
 
+class App extends React.Component {
   handleFacebookLogout = () => {
     window.FB.getLoginStatus((response) => {
       if (response.status === 'connected') {
@@ -31,7 +20,7 @@ render () {
     <div className="App">
       <header className="App-header">
       <h2>Social Media Manager</h2>
-      <button onClick={this.handleFacebookLogin}>Login</button>
+      <FacebookLogin />
       <button onClick={this.handleFacebookLogout}>Logout</button>
       </header>
     </div>
