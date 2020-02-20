@@ -9,6 +9,6 @@ Posting to Facebook:
 
 Development notes
 * Facebook Login requires HTTPS. I'm using ngrok to be a forwarding mask for localhost.
-* After starting up ngrok make sure that the Facebook App accepts OAuth redirects from the ngrok address (as the Facebook App is under my account and required permissions, you will ne be able to use this app I'm building). Also need to add this URL to the `App settings => basic => site URL` this is required for logging out of Facebook from this app.
-* Command to set up ngrok `ngrok http -bind-tls=true localhost:3001`
+* After starting up ngrok make sure that the Facebook App accepts OAuth redirects from the ngrok address (as the Facebook App is under my account and required permissions, you will ne be able to use this app I'm building). Also need to add this URL to the `App settings => basic => site URL` and to `Facebook Login => settings => Valid OAuth Redirect` this is required for logging in and out of Facebook from this app.
+* Command to set up ngrok `ngrok http 3001 -host-header="localhost:3001"`?
 * CRA does not support secure websocket by default, there should be an updated to react-dev-utils soon. But if the ngrok address fails with `websocket not secure` go to `node_modules/react-dev-utils/webpackHotDevClient.js` and change ```protocol: 'ws'``` to ```protocol: window.location.protocol === 'https:' ? 'wss' : 'ws' ```. 
