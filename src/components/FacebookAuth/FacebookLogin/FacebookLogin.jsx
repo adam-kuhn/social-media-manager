@@ -1,5 +1,5 @@
 import React from 'react'
-
+//TO DO correctly disable login/logout disabling
 class FacebookLogin extends React.Component {
   constructor() {
     super()
