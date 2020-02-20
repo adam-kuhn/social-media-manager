@@ -10,14 +10,32 @@ class FacebookAuth extends React.Component {
     }
   }
   componentDidMount() {
-    // check logged in state
-    // disable login/logout based on logged in state
+    document.addEventListener('FBObjectReady', this.initalizeFacebookLogin)
+  }
+  componentWillUnmount() {
+    document.removeEventListener('FBObjectReady', this.initalizeFacebookLogin)
+  }
+  initalizeFacebookLogin = () => {
+    this.FB = window.FB
+    this.checkLoginStatus()
+    this.setState({disableLogin: false})
+  }
+  checkLoginStatus = () => {
+    this.FB.getLoginStatus(response => {
+      const userLoggedInStatus = response.status === 'connected'
+      this.setUserLoggedInStatus(userLoggedInStatus);
+    })
+  }
+  setUserLoggedInStatus = (userStatus) => {
+    this.setState({
+      userIsLoggedIn: userStatus
+    })
   }
   render () {
     return (
       <div>
-        <FacebookLogin userIsLoggedIn={this.state.userIsLoggedIn} />
-        <FacebookLogout userIsLoggedIn={this.state.userIsLoggedOut} />
+        <FacebookLogin userIsLoggedIn={this.state.userIsLoggedIn} setUserLoggedInStatus={this.setUserLoggedInStatus}/>
+        <FacebookLogout userIsLoggedIn={this.state.userIsLoggedIn} setUserLoggedInStatus={this.setUserLoggedInStatus}/>
       </div>
     )
   }

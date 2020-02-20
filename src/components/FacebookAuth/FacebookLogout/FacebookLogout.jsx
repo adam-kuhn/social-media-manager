@@ -4,16 +4,15 @@ class FacebookLogout extends React.Component {
   handleFacebookLogout = () => {
     window.FB.getLoginStatus((response) => {
       if (response.status === 'connected') {
-        console.log('conne')
-        window.FB.logout(function(response) {
-          console.log(response)
+        window.FB.logout((response) => {
+          this.props.setUserLoggedInStatus(false)
         })
       }
     })
   }
   render () {
     return (
-      <button onClick={this.handleFacebookLogout}>Logout</button>
+      <button disabled={!this.props.userIsLoggedIn} onClick={this.handleFacebookLogout}>Logout</button>
     )
   }
 }
