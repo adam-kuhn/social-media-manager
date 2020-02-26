@@ -1,16 +1,20 @@
 import React from 'react'
+import {HashRouter as Router} from 'react-router-dom'
 import FacebookAuth from './FacebookAuth/FacebookAuth'
+import RouteLayout from '../Layout/RouteLayout'
 import './App.css'
 
 
 const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-      <h2>Social Media Manager</h2>
-      <FacebookAuth />
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+        <RouteLayout />
+        <FacebookAuth />
+        </header>
+      </div>
+    </Router>
   )
 }
 
