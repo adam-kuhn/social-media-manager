@@ -11,7 +11,6 @@ const FacebookLogout = (props) => {
     window.FB.getLoginStatus((response) => {
       if (response.status === 'connected') {
         window.FB.logout((response) => {
-          props.setUserLoggedInStatus(false)
           history.push('/')
         })
       }
