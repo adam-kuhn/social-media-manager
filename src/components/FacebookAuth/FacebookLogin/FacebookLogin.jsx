@@ -20,12 +20,14 @@ const FacebookLogin = (props) => {
            console.log('User cancelled login or did not fully authorize.')
           }
         })
+      } else {
+        alert('Hang on, while we connect to Facebook...')
       }
     }
   }
-    return (
-      <button onClick={facebookLoginHandler}>Login to Facebook</button>
-    )
+  return (
+    <button onClick={facebookLoginHandler}>Login to Facebook</button>
+  )
 }
 
 export default FacebookLogin
