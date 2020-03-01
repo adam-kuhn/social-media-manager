@@ -11,13 +11,14 @@ const FacebookLogin = (props) => {
     else {
       if (window.FB) {
         window.FB.login(response => {
-          if (response.authResponse) {
-           window.FB.api('/me', response => { // remove response if not intending to us it
-             props.setUserLoggedInStatus(true)
-             history.push('/main')
-           })
+          if (response.status === 'connected') {
+            history.push('/main')
+            // get info about person logged in and something with it
+            window.FB.api('/me', response => { // remove response if not intending to us it
+            })
           } else {
-           console.log('User cancelled login or did not fully authorize.')
+            alert('Facebook authorization failed')
+            console.log('User cancelled login or did not fully authorize.')
           }
         })
       } else {
