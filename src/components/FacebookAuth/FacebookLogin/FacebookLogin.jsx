@@ -1,24 +1,34 @@
 import React from 'react'
-class FacebookLogin extends React.Component {
+import {useHistory} from 'react-router-dom'
 
-  facebookLoginHandler = () => {
-    if (window.FB) {
-      window.FB.login(response => {
-        if (response.authResponse) {
-         window.FB.api('/me', response => { // remove response if not intending to us it
-           this.props.setUserLoggedInStatus(true)
-         })
-        } else {
-         console.log('User cancelled login or did not fully authorize.')
-        }
-      })
+const FacebookLogin = (props) => {
+  const history = useHistory()
+  const facebookLoginHandler = () => {
+    // Used so I don't have to connect to Facebook SDK using ngrok
+    // for when I'm lazy and just testing non FB functionality
+    const devLogin = false
+    if (devLogin) history.push('/main')
+    else {
+      if (window.FB) {
+        window.FB.login(response => {
+          if (response.status === 'connected') {
+            history.push('/main')
+            // get info about person logged in and something with it
+            window.FB.api('/me', response => { // remove response if not intending to us it
+            })
+          } else {
+            alert('Facebook authorization failed')
+            console.log('User cancelled login or did not fully authorize.')
+          }
+        })
+      } else {
+        alert('Hang on, while we connect to Facebook...')
+      }
     }
   }
-  render () {
-    return (
-      <button disabled={this.props.userIsLoggedIn} onClick={this.facebookLoginHandler}>Login to Facebook</button>
-    )
-  }
+  return (
+    <button onClick={facebookLoginHandler}>Login to Facebook</button>
+  )
 }
 
 export default FacebookLogin
