@@ -6,7 +6,7 @@ const FacebookLogout = (props) => {
   const handleFacebookLogout = () => {
     // Used so I don't have to connect to Facebook SDK using ngrok
     // for when I'm lazy and just testing non FB functionality
-    const devLogin = true
+    const devLogin = false
     if (devLogin) history.push('/') 
     window.FB.getLoginStatus((response) => {
       if (response.status === 'connected') {
